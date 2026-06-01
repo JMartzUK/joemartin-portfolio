@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joe Martin — Music Producer & Sound Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:          #0b0b0b;
+            --surface:     #141414;
+            --surface2:    #1b1b1b;
+            --border:      #222222;
+            --border2:     #2e2e2e;
+            --text:        #ece8e1;
+            --text-dim:    #666058;
+            --text-mid:    #9a9390;
+            --accent:      #c8a96e;
+            --accent-soft: rgba(200,169,110,.12);
+            --mono:        'DM Mono', monospace;
+            --serif:       'Cormorant Garamond', serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 13.5px;
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 2.5rem;
+            background: rgba(11,11,11,.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: .7rem;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 8rem 2.5rem 5rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* subtle radial glow */
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(200,169,110,.055) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            font-size: .68rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-name {
+            font-family: var(--serif);
+            font-size: clamp(4.5rem, 11vw, 11rem);
+            font-weight: 300;
+            line-height: .88;
+            letter-spacing: -.02em;
+            margin-bottom: 2.75rem;
+        }
+
+        .hero-name em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-pills {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-pill {
+            font-size: .68rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            border: 1px solid var(--border2);
+            padding: .35rem .85rem;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            font-size: .62rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            writing-mode: vertical-rl;
+            animation: blink 2.4s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%,100% { opacity: 1; }
+            50%      { opacity: .3; }
+        }
+
+        /* ── SECTION SHELL ── */
+        section {
+            padding: 5.5rem 2.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .s-head {
+            display: flex;
+            align-items: baseline;
+            gap: 1.25rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .s-num {
+            font-size: .62rem;
+            color: var(--accent);
+            letter-spacing: .18em;
+            flex-shrink: 0;
+        }
+
+        .s-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4.5vw, 3.4rem);
+            font-weight: 300;
+            letter-spacing: -.015em;
+        }
+
+        /* ── ABOUT ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 860px;
+        }
+
+        .about-bio {
+            font-size: .875rem;
+            line-height: 1.95;
+            color: var(--text-mid);
+        }
+
+        .about-bio strong { color: var(--text); font-weight: 500; }
+        .about-bio p + p  { margin-top: 1rem; }
+
+        .about-facts { display: flex; flex-direction: column; gap: 0; }
+
+        .fact {
+            border-top: 1px solid var(--border);
+            padding: .9rem 0;
+        }
+
+        .fact-label {
+            font-size: .62rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: .3rem;
+        }
+
+        .fact-value {
+            font-size: .82rem;
+            color: var(--text);
+        }
+
+        .fact-value a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .fact-value a:hover { text-decoration: underline; }
+
+        /* ── MUSIC ── */
+        .sc-block {
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .sc-label {
+            padding: .6rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+            font-size: .62rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            background: var(--surface);
+        }
+
+        .sc-block iframe { display: block; width: 100%; }
+
+        .tracks-head {
+            font-size: .62rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 0;
+        }
+
+        .track-row {
+            display: grid;
+            grid-template-columns: 2rem 1fr auto auto;
+            align-items: center;
+            gap: 1.25rem;
+            padding: .9rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .track-row:last-child { border-bottom: 1px solid var(--border); }
+
+        .track-n {
+            font-size: .62rem;
+            color: var(--text-dim);
+        }
+
+        .track-info .track-title { font-size: .85rem; margin-bottom: .15rem; }
+        .track-info .track-sub   { font-size: .7rem; color: var(--text-dim); }
+
+        .track-row audio {
+            height: 28px;
+            width: 200px;
+            accent-color: var(--accent);
+        }
+
+        .tag {
+            font-size: .6rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: .22rem .6rem;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .tag-done { color: var(--accent);       border: 1px solid rgba(200,169,110,.35); }
+        .tag-wip  { color: var(--text-mid);     border: 1px solid var(--border2); }
+
+        /* ── PORTFOLIO DOCS ── */
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+            border: 1px solid var(--border);
+            gap: 0;
+        }
+
+        .doc-card {
+            padding: 1.75rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: background .18s, border-color .18s;
+            position: relative;
+        }
+
+        /* inner borders only */
+        .doc-card:not(:last-child) { border-right: 1px solid var(--border); }
+
+        .doc-card:hover {
+            background: var(--surface2);
+            border-color: var(--border2);
+        }
+
+        .doc-card:hover .doc-arrow { opacity: 1; transform: translate(3px,-3px); }
+
+        .doc-cat {
+            font-size: .6rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: .6rem;
+        }
+
+        .doc-card h3 {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: .5rem;
+        }
+
+        .doc-card p {
+            font-size: .74rem;
+            color: var(--text-dim);
+            line-height: 1.65;
+        }
+
+        .doc-arrow {
+            position: absolute;
+            top: 1.75rem;
+            right: 1.75rem;
+            color: var(--accent);
+            opacity: 0;
+            transition: opacity .18s, transform .18s;
+        }
+
+        /* ── MODAL ── */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.87);
+            z-index: 200;
+            padding: 1.5rem;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-box {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            width: 100%;
+            max-width: 860px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .85rem 1.4rem;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .modal-bar h4 {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 1.15rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color .15s;
+            padding: .25rem;
+        }
+
+        .modal-close:hover { color: var(--text); }
+
+        .modal-body { flex: 1; overflow: hidden; min-height: 0; }
+        .modal-body iframe { display: block; width: 100%; height: 100%; min-height: 65vh; border: none; }
+
+        /* ── REFLECTION ── */
+        .reflect-wrap { max-width: 680px; }
+
+        .reflect-placeholder {
+            border: 1px dashed var(--border2);
+            padding: 2.25rem 2.5rem;
+            color: var(--text-dim);
+            font-size: .82rem;
+            font-style: italic;
+            line-height: 1.85;
+        }
+
+        .reflect-text { font-size: .88rem; color: var(--text-mid); line-height: 2; }
+        .reflect-text p + p { margin-top: 1.5rem; }
+
+        .reflect-text blockquote {
+            border-left: 2px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--text-mid);
+            line-height: 1.4;
+        }
+
+        /* ── CONTACT ── */
+        .contact-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--border2);
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: .78rem;
+            letter-spacing: .08em;
+            transition: border-color .2s, color .2s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .contact-link svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: .68rem;
+            color: var(--text-dim);
+            letter-spacing: .05em;
+        }
+
+        /* ── FADE-IN ── */
+        .fi {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .55s ease, transform .55s ease;
+        }
+
+        .fi.vis { opacity: 1; transform: none; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 700px) {
+            nav { padding: .85rem 1.25rem; }
+            .nav-links li:nth-child(n+4) { display: none; }
+
+            #hero { padding: 6rem 1.25rem 3.5rem; }
+            section { padding: 3.5rem 1.25rem; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+            .track-row { grid-template-columns: 2rem 1fr auto; }
+            .track-row audio { display: none; }
+
+            .doc-grid { grid-template-columns: 1fr; }
+            .doc-card:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
+
+            footer { flex-direction: column; gap: .5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+    <a href="#hero" class="nav-logo">Joe Martin</a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#reflection">Reflection</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+    <p class="hero-eyebrow">Portfolio — Music Production &amp; Sound Engineering</p>
+    <h1 class="hero-name">Joe<br><em>Martin</em></h1>
+    <div class="hero-pills">
+        <span class="hero-pill">Music Producer</span>
+        <span class="hero-pill">Sound Engineer</span>
+        <span class="hero-pill">Drum &amp; Bass</span>
+    </div>
+    <span class="scroll-hint">Scroll ↓</span>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+    <div class="s-head fi">
+        <span class="s-num">01</span>
+        <h2 class="s-title">About</h2>
+    </div>
+    <div class="about-grid fi">
+        <div class="about-bio">
+            <!--
+                EDIT: Update this bio with your own words.
+                Keep it concise — 2–3 short paragraphs.
+            -->
+            <p>I'm a music production and sound engineering student with a focus on <strong>Drum &amp; Bass</strong>. My work spans original production, live sound, and creative direction — built around a passion for high-energy electronic music and the culture around it.</p>
+            <p>I'm currently developing both my technical skillset and a long-term strategy for entering the music industry — combining creative output with an understanding of the business, legal, and commercial frameworks that underpin professional practice.</p>
+            <p>Alongside my studies, I'm the founder and primary creative force behind <strong>HAZMAT</strong> — a DnB artist project built around an anonymous mascot concept, inspired by acts like Marshmello and Daft Punk.</p>
+        </div>
+        <div class="about-facts">
+            <div class="fact">
+                <p class="fact-label">Discipline</p>
+                <p class="fact-value">Music Production &amp; Sound Engineering</p>
+            </div>
+            <div class="fact">
+                <p class="fact-label">Genre Focus</p>
+                <p class="fact-value">Drum &amp; Bass · Electronic</p>
+            </div>
+            <div class="fact">
+                <p class="fact-label">Artist Project</p>
+                <p class="fact-value">HAZMAT (DnB)</p>
+            </div>
+            <div class="fact">
+                <!--
+                    EDIT: Replace with your actual DAW / main tools
+                -->
+                <p class="fact-label">DAW / Tools</p>
+                <p class="fact-value">Ableton Live · Logic Pro · Pro Tools</p>
+            </div>
+            <div class="fact">
+                <p class="fact-label">DJ Name</p>
+                <p class="fact-value">JMARTZ</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ MUSIC ══ -->
+<section id="music">
+    <div class="s-head fi">
+        <span class="s-num">02</span>
+        <h2 class="s-title">Music</h2>
+    </div>
+
+    <!-- SoundCloud embed -->
+    <div class="sc-block fi">
+        <div class="sc-label">SoundCloud</div>
+        <!--
+            ══ HOW TO UPDATE THE SOUNDCLOUD EMBED ══
+            1. Go to your SoundCloud profile page
+            2. Click Share → Embed
+            3. Copy the <iframe> code they give you
+            4. Replace the entire <iframe> block below with it
+
+            Quick shortcut: just change YOUR-SOUNDCLOUD-USERNAME
+            in the src URL below to your actual username.
+        -->
+        <iframe
+            width="100%"
+            height="300"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/YOUR-SOUNDCLOUD-USERNAME&color=%23c8a96e&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
+        </iframe>
+    </div>
+
+    <!-- Local audio tracks -->
+    <p class="tracks-head fi">Selected Tracks</p>
+    <div class="fi">
+        <!--
+            ══ HOW TO ADD YOUR MUSIC FILES ══
+            1. Create a folder called "audio" in your GitHub repo
+            2. Upload your MP3 files into that folder
+               (Use MP3, not WAV — WAV files are too large for the web)
+            3. For each track, update:
+               - src="audio/your-filename.mp3"
+               - The track title and sub-label
+               - The tag class: tag-done (finished) or tag-wip (work in progress)
+            4. Add or remove .track-row blocks to match how many tracks you have
+        -->
+
+        <div class="track-row">
+            <span class="track-n">01</span>
+            <div class="track-info">
+                <p class="track-title">Track Title</p>
+                <p class="track-sub">Drum &amp; Bass · 2025</p>
+            </div>
+            <audio controls preload="none">
+                <source src="audio/track-01.mp3" type="audio/mpeg">
+            </audio>
+            <span class="tag tag-done">Finished</span>
+        </div>
+
+        <div class="track-row">
+            <span class="track-n">02</span>
+            <div class="track-info">
+                <p class="track-title">Track Title</p>
+                <p class="track-sub">Drum &amp; Bass · 2025</p>
+            </div>
+            <audio controls preload="none">
+                <source src="audio/track-02.mp3" type="audio/mpeg">
+            </audio>
+            <span class="tag tag-done">Finished</span>
+        </div>
+
+        <div class="track-row">
+            <span class="track-n">03</span>
+            <div class="track-info">
+                <p class="track-title">Track Title</p>
+                <p class="track-sub">Drum &amp; Bass · 2025</p>
+            </div>
+            <audio controls preload="none">
+                <source src="audio/track-03.mp3" type="audio/mpeg">
+            </audio>
+            <span class="tag tag-wip">Work in Progress</span>
+        </div>
+
+        <div class="track-row">
+            <span class="track-n">04</span>
+            <div class="track-info">
+                <p class="track-title">Track Title</p>
+                <p class="track-sub">Drum &amp; Bass · 2025</p>
+            </div>
+            <audio controls preload="none">
+                <source src="audio/track-04.mp3" type="audio/mpeg">
+            </audio>
+            <span class="tag tag-wip">Work in Progress</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══ PORTFOLIO DOCUMENTS ══ -->
+<section id="portfolio">
+    <div class="s-head fi">
+        <span class="s-num">03</span>
+        <h2 class="s-title">Portfolio Documents</h2>
+    </div>
+    <div class="doc-grid fi">
+        <!--
+            ══ HOW TO ADD YOUR DOCUMENTS ══
+            1. Create a folder called "documents" in your GitHub repo
+            2. Upload each PDF into that folder — keep the filenames
+               exactly as listed in the onclick handlers below, or
+               update them to match whatever you name your files.
+            3. Each card's onclick calls openDoc('path', 'Title')
+               — update the path if you rename any file.
+        -->
+
+        <div class="doc-card" onclick="openDoc('documents/business-plan.pdf','5-Year Business Plan')">
+            <p class="doc-cat">Business Strategy</p>
+            <h3>5-Year Business Plan</h3>
+            <p>Financial projections, revenue streams, and strategic roadmap for HAZMAT from Year 1 through to 2030.</p>
+            <span class="doc-arrow">↗</span>
+        </div>
+
+        <div class="doc-card" onclick="openDoc('documents/pitch-presentation.pdf','Dragon\'s Den Pitch Presentation')">
+            <p class="doc-cat">Pitch Deck</p>
+            <h3>Dragon's Den Pitch</h3>
+            <p>Investor pitch presented to an industry panel — vision, USP, stakeholder analysis, and growth strategy for HAZMAT.</p>
+            <span class="doc-arrow">↗</span>
+        </div>
+
+        <div class="doc-card" onclick="openDoc('documents/hazmat-swot.pdf','HAZMAT SWOT Analysis')">
+            <p class="doc-cat">Business Analysis</p>
+            <h3>HAZMAT SWOT Analysis</h3>
+            <p>Strengths, weaknesses, opportunities, and threats analysis for the HAZMAT brand and business model.</p>
+            <span class="doc-arrow">↗</span>
+        </div>
+
+        <div class="doc-card" onclick="openDoc('documents/niche-map.pdf','HAZMAT Niche Map')">
+            <p class="doc-cat">Market Positioning</p>
+            <h3>Niche Map</h3>
+            <p>Market positioning map identifying HAZMAT's competitive landscape within the Drum &amp; Bass scene.</p>
+            <span class="doc-arrow">↗</span>
+        </div>
+
+        <div class="doc-card" onclick="openDoc('documents/rams.pdf','Live Events Risk Assessment (RAMS)')">
+            <p class="doc-cat">Health &amp; Safety</p>
+            <h3>Live Events RAMS</h3>
+            <p>Risk Assessment and Method Statement for live DJ performances — covering setup, operation, and breakdown procedures.</p>
+            <span class="doc-arrow">↗</span>
+        </div>
+
+        <div class="doc-card" onclick="openDoc('documents/personal-swot.pdf','Personal SWOT Analysis')">
+            <p class="doc-cat">Personal Development</p>
+            <h3>Personal SWOT Analysis</h3>
+            <p>Self-assessment of personal strengths, weaknesses, opportunities, and development areas as a producer and sound engineer.</p>
+            <span class="doc-arrow">↗</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══ REFLECTION ══ -->
+<section id="reflection">
+    <div class="s-head fi">
+        <span class="s-num">04</span>
+        <h2 class="s-title">Critical Reflection</h2>
+    </div>
+    <div class="reflect-wrap fi">
+        <!--
+            ══ REPLACE THIS PLACEHOLDER WITH YOUR REFLECTION ══
+            Delete the <div class="reflect-placeholder"> block entirely
+            and replace it with <div class="reflect-text"> containing
+            your actual written reflection (aim for 400–600 words).
+
+            It should critically evaluate your own skills and experience
+            against professional/commercial standards — not just describe
+            what you did. Good structure:
+              • Where you are now vs where professionals are
+              • Specific things you'd do differently / need to improve
+              • How the HAZMAT project and studies have developed you
+              • Where you aim to be and what it will take to get there
+        -->
+        <div class="reflect-placeholder">
+            [ Critical reflection to be written here — this section will critically evaluate personal skills and experience against professional industry standards in Drum &amp; Bass production and sound engineering. ]
+        </div>
+    </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+    <div class="s-head fi">
+        <span class="s-num">05</span>
+        <h2 class="s-title">Contact</h2>
+    </div>
+    <div class="contact-row fi">
+        <!--
+            EDIT: Replace YOUR-SOUNDCLOUD-USERNAME and YOUR-INSTAGRAM-USERNAME
+            with your actual handles. Add an email link if you want one.
+        -->
+        <a href="https://soundcloud.com/YOUR-SOUNDCLOUD-USERNAME" target="_blank" rel="noopener" class="contact-link">
+            <svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c1.6 0 2.68-1.08 2.68-2.56 0-1.29-.92-2.38-2.18-2.56a3.12 3.12 0 0 0-3.29-3.3c-.32 0-.65.05-.93.14A4.15 4.15 0 0 0 12.46 7c-.43 0-.84.1-1.21.29A.83.83 0 0 0 11 8v.87h.56zM0 15.24C0 16.2.76 17 1.68 17h1.52V12.2c-.43-.23-.91-.36-1.4-.36A2.8 2.8 0 0 0 0 14.72v.52zm4.24-4.68c-.32 0-.64.06-.94.17V17h3.74v-6.44a4.15 4.15 0 0 0-2.8-1zm3.79.5V17h3.05V9.15a4.13 4.13 0 0 0-3.05.91z"/></svg>
+            SoundCloud
+        </a>
+
+        <a href="https://instagram.com/YOUR-INSTAGRAM-USERNAME" target="_blank" rel="noopener" class="contact-link">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            Instagram
+        </a>
+
+        <!-- Optional — uncomment and update if you want an email link
+        <a href="mailto:your@email.com" class="contact-link">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Email
+        </a>
+        -->
+    </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+    <span>© 2026 Joe Martin</span>
+    <span>Music Producer &amp; Sound Engineer</span>
+</footer>
+
+<!-- ══ DOCUMENT MODAL ══ -->
+<div class="modal-backdrop" id="modal" onclick="handleBackdropClick(event)">
+    <div class="modal-box">
+        <div class="modal-bar">
+            <h4 id="modal-title">Document</h4>
+            <button class="modal-close" onclick="closeDoc()" aria-label="Close">✕</button>
+        </div>
+        <div class="modal-body">
+            <iframe id="modal-frame" title="Document viewer"></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ── Document modal ── */
+    function openDoc(src, title) {
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('modal-frame').src = src;
+        document.getElementById('modal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDoc() {
+        document.getElementById('modal').classList.remove('open');
+        document.getElementById('modal-frame').src = '';
+        document.body.style.overflow = '';
+    }
+
+    function handleBackdropClick(e) {
+        if (e.target === document.getElementById('modal')) closeDoc();
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDoc(); });
+
+    /* ── Scroll fade-in ── */
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
